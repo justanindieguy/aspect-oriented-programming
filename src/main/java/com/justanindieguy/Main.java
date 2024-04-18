@@ -1,30 +1,29 @@
 package com.justanindieguy;
 
-import java.util.Arrays;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.justanindieguy.beans.Person;
-import com.justanindieguy.beans.Vehicle;
 import com.justanindieguy.config.ProjectConfig;
+import com.justanindieguy.model.Song;
 import com.justanindieguy.services.VehicleServices;
 
 public class Main {
 
   public static void main(String[] args) {
     var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
-    String[] persons = context.getBeanNamesForType(Person.class);
-    String[] vehicles = context.getBeanNamesForType(Vehicle.class);
-    System.out.println(Arrays.toString(persons));
-    System.out.println(Arrays.toString(vehicles));
+    VehicleServices vehicleServices = context.getBean(VehicleServices.class);
+    boolean vehicleStarted = false;
 
-    Person person = context.getBean(Person.class);
-    System.out.println("Person bean from Context: " + person);
+    Song song = new Song();
+    song.setArtistName("Arctic Monkeys");
+    song.setTitle("Body Paint");
+    String music = vehicleServices.playMusic(vehicleStarted, song);
+    System.out.println(music);
 
-    Vehicle vehicle = person.getVehicle();
-    VehicleServices vehicleServices = vehicle.getVehicleServices();
-    vehicleServices.playMusic();
-    vehicleServices.moveVehicle();
+    String status = null;
+    status = vehicleServices.moveVehicle(vehicleStarted);
+    System.out.println(status);
+    status = vehicleServices.applyBrake(vehicleStarted);
+    System.out.println(status);
   }
 
 }

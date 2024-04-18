@@ -10,20 +10,17 @@ public class Main {
 
   public static void main(String[] args) {
     var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
-    VehicleServices vehicleServices = context.getBean(VehicleServices.class);
-    boolean vehicleStarted = false;
+    var vehicleServices = context.getBean(VehicleServices.class);
+    System.out.println(vehicleServices.getClass());
 
     Song song = new Song();
-    song.setArtistName("Arctic Monkeys");
     song.setTitle("Body Paint");
-    String music = vehicleServices.playMusic(vehicleStarted, song);
-    System.out.println(music);
+    song.setArtistName("Arctic Monkeys");
 
-    String status = null;
-    status = vehicleServices.moveVehicle(vehicleStarted);
-    System.out.println(status);
-    status = vehicleServices.applyBrake(vehicleStarted);
-    System.out.println(status);
+    boolean vehicleStarted = true;
+    String moveVehicleStatus = vehicleServices.moveVehicle(vehicleStarted);
+    String playMusicStatus = vehicleServices.playMusic(vehicleStarted, song);
+    String applyBrakeStatus = vehicleServices.applyBrake(vehicleStarted);
   }
 
 }

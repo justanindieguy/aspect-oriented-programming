@@ -20,33 +20,15 @@ public class VehicleServices {
   }
 
   public String playMusic(boolean vehicleStarted, Song song) {
-    String music = null;
-
-    if (vehicleStarted) {
-      music = speakers.makeSound(song);
-    }
-
-    return music;
+    return speakers.makeSound(song);
   }
 
   public String moveVehicle(boolean vehicleStarted) {
-    String status = null;
-
-    if (vehicleStarted) {
-      status = tyres.rotate();
-    }
-
-    return status;
+    return tyres.rotate();
   }
 
   public String applyBrake(boolean vehicleStarted) {
-    String status = null;
-
-    if (vehicleStarted) {
-      status = tyres.stop();
-    }
-
-    return status;
+    return tyres.stop();
   }
 
   public Speakers getSpeakers() {

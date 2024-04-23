@@ -3,6 +3,7 @@ package com.justanindieguy.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.justanindieguy.interfaces.LogAspect;
 import com.justanindieguy.interfaces.Speakers;
 import com.justanindieguy.interfaces.Tyres;
 import com.justanindieguy.model.Song;
@@ -19,6 +20,7 @@ public class VehicleServices {
     this.tyres = tyres;
   }
 
+  @LogAspect
   public String playMusic(boolean vehicleStarted, Song song) {
     return speakers.makeSound(song);
   }

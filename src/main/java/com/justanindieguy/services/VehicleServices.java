@@ -24,6 +24,7 @@ public class VehicleServices {
   }
 
   public String moveVehicle(boolean vehicleStarted) {
+    // throw new NullPointerException("Damn! Null pointer exception ocurred!");
     return tyres.rotate();
   }
 

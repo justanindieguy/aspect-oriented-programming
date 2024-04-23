@@ -21,8 +21,25 @@ public class LoggerAspect {
 
   private final Logger logger = Logger.getLogger(LoggerAspect.class.getName());
 
+  /*
+   * Both aspects (log and logWithAnnotation) will match and get executed
+   */
+
   @Around("execution(* com.justanindieguy.services.*.*(..))")
   public void log(ProceedingJoinPoint joinPoint) throws Throwable {
+    logger.info(joinPoint.getSignature().toString() + " method execution start");
+
+    Instant start = Instant.now();
+    joinPoint.proceed();
+    Instant finish = Instant.now();
+
+    long timeElapsed = Duration.between(start, finish).toMillis();
+    logger.info("Time took to execute the method: " + timeElapsed);
+    logger.info(joinPoint.getSignature().toString() + " method execution end");
+  }
+
+  @Around("@annotation(com.justanindieguy.interfaces.LogAspect)")
+  public void logWithAnnotation(ProceedingJoinPoint joinPoint) throws Throwable {
     logger.info(joinPoint.getSignature().toString() + " method execution start");
 
     Instant start = Instant.now();
